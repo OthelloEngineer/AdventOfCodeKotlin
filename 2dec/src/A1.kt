@@ -2,10 +2,23 @@ import java.io.File
 import java.io.InputStream
 
 fun main() {
-    println(locationCalculator(directionParser()))
+    println(locationCalculatorAnswer2(directionParser()))
 }
+fun locationCalculatorAnswer2(moveSet: MutableList<Movement>) : Int{
+    var aim: Int = 0
+    var depth: Int = 0
+    var length: Int = 0
 
-fun locationCalculator(moveSet: MutableList<Movement>) : Int{
+    for (movement in moveSet) {
+        when(movement.direction){
+            Direction.DOWN -> {aim+=movement.amount}
+            Direction.UP -> {aim-=movement.amount}
+            Direction.FORWARD -> {length += movement.amount; depth += movement.amount*aim}
+        }
+    }
+    return depth*length
+}
+fun locationCalculatorAnswer1(moveSet: MutableList<Movement>) : Int{
     var depth: Int = 0
     var length: Int = 0
 
